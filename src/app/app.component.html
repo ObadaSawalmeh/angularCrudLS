@@ -1,4 +1,87 @@
-<div class="text-white bg-primary">
-  welcome obada
+<div class="container p-5">
+  <div class="row">
+    <div class="col-8">
+      <div class="card">
+        <div class="card-header bg-success text-white">
+          <h6>Employee List</h6>
+        </div>
+        <div class="card-body">
+          <table class="table table-striped text-center">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Number</th>
+                <th>Address</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (item of empList; track $index) {
+              <tr>
+                <td>{{item.empId}}</td>
+                <td>{{item.empName}}</td>
+                <td>{{item.empNumber}}</td>
+                <td>{{item.empAddress}}</td>
+                <td>
+                  <div class="btn btn-success px-4 py-1 m-1" (click)="edit(item)">Edit</div>
+                  <div class="btn btn-danger px-4 py-1 m-1" (click)="delete($index)">Delete</div>
+                </td>
+              </tr>
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-4">
+      <div class="card">
+        <div class="card-header bg-success">
+          new emp
+        </div>
+        <div class="card-body">
+          <form [formGroup]="empForm">
+            <div class="row">
+              <div class="col-12">
+                <label for="empName">empName</label>
+                <input type="text" formControlName="empName" class="form-control">
+              </div>
+              <div class="col-12">
+                <label for="empEmail">empEmail</label>
+                <input type="email" formControlName="empEmail" class="form-control">
+              </div>
+              <div class="col-8">
+                <label for="empNumber">empNumber</label>
+                <input type="text" formControlName="empNumber" class="form-control">
+              </div>
+              <div class="col-4">
+                <label for="empState">empState</label>
+                <input type="text" formControlName="empState" class="form-control">
+              </div>
+              <div class="col-12">
+                <label for="empPassword">empPassword</label>
+                <input type="text" formControlName="empPassword" class="form-control">
+              </div>
+              <div class="col-12">
+                <label for="empAddress">address</label>
+                <textarea formControlName="empAddress" class="form-control"></textarea>
+              </div>
+            </div>
+            <div class="row p-4">
+              <div class="col-6">
+                <div class="btn btn-danger text-center px-4 py-2" type="button" (click)="this.empForm.reset()">reset</div>
+              </div>
+              <div class="col-6">
+                @if(!show){
+                <div class="btn btn-success text-center px-4 py-2" type="button" (click)="onSave()">save</div>
+                }@else {
+                <div class="btn btn-success text-center px-4 py-2"  type="button" (click)="onUpdate(empObj.empId)">update</div>
+                }
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
-<router-outlet />
